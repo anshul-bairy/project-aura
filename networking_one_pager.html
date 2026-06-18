@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Networking — The One Pager</title>
+<style>
+  :root{
+    --paper:#F6F7F9;
+    --card:#FFFFFF;
+    --ink:#17283D;
+    --ink-soft:#4C5C70;
+    --route:#0E7C86;
+    --route-soft:#D6ECEE;
+    --signal:#D9801F;
+    --signal-soft:#F8E7CF;
+    --lan:#2C8A6C;
+    --lan-soft:#DDEFE7;
+    --line:#DCE2EA;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    line-height:1.5;
+    padding:22px 16px 60px;
+  }
+  .wrap{max-width:760px;margin:0 auto;}
+
+  .eyebrow{
+    font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--route);font-weight:600;
+  }
+
+  /* Header */
+  header{
+    border:1px solid var(--line);background:var(--card);border-radius:16px;
+    padding:24px 22px;margin-bottom:22px;position:relative;overflow:hidden;
+  }
+  header .eyebrow{color:var(--signal);}
+  h1{font-size:27px;line-height:1.15;margin:.35em 0 .3em;letter-spacing:-.01em;}
+  header p{margin:0;color:var(--ink-soft);font-size:15px;max-width:54ch;}
+  .thesis{
+    margin-top:16px;padding:13px 15px;border-radius:11px;
+    background:var(--route-soft);color:#0a5258;font-size:15px;font-weight:600;
+    display:flex;gap:10px;align-items:flex-start;
+  }
+  .thesis svg{flex:0 0 auto;margin-top:2px;}
+
+  /* Section label */
+  .section{margin:30px 0 12px;display:flex;align-items:center;gap:12px;}
+  .section .eyebrow{white-space:nowrap;}
+  .section .rule{height:1px;background:var(--line);flex:1;}
+
+  /* Cards */
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:18px 18px 16px;margin-bottom:13px;
+  }
+  .term{font-size:18px;font-weight:700;margin:2px 0 2px;letter-spacing:-.01em;}
+  .plain{color:var(--ink);font-size:14.5px;margin:6px 0 0;}
+  .plain b{color:var(--ink);}
+  .analogy{
+    margin-top:10px;padding-left:13px;border-left:3px solid var(--signal);
+    color:var(--ink-soft);font-size:14px;
+  }
+  .analogy .lead{
+    font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--signal);display:block;margin-bottom:2px;font-weight:600;
+  }
+  .lcs{
+    margin-top:12px;display:flex;gap:8px;align-items:flex-start;
+    background:var(--lan-soft);border-radius:9px;padding:9px 11px;
+    font-size:13px;color:#1c5e49;
+  }
+  .lcs b{color:#13402f;}
+  .lcs .tag{
+    font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    font-size:9.5px;letter-spacing:.1em;font-weight:700;color:#fff;
+    background:var(--lan);border-radius:5px;padding:2px 6px;flex:0 0 auto;margin-top:1px;
+  }
+  figure{margin:13px 0 2px;}
+  svg{max-width:100%;height:auto;display:block;}
+  .cap{font-size:12px;color:var(--ink-soft);margin-top:6px;text-align:center;}
+
+  /* Worked example */
+  .journey{
+    background:var(--ink);color:#E8EDF3;border-radius:16px;padding:22px 20px;margin-top:30px;
+  }
+  .journey .eyebrow{color:var(--signal);}
+  .journey h2{font-size:19px;margin:.3em 0 .2em;color:#fff;}
+  .journey > p{color:#A9B7C7;font-size:14px;margin:0 0 16px;}
+  .step{display:flex;gap:13px;padding:11px 0;border-top:1px solid #2A3C52;}
+  .step:first-of-type{border-top:none;}
+  .num{
+    flex:0 0 auto;width:26px;height:26px;border-radius:50%;
+    background:var(--route);color:#fff;font-weight:700;font-size:13px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:ui-monospace,monospace;
+  }
+  .step p{margin:0;font-size:14px;color:#D5DEE8;}
+  .step b{color:#fff;}
+
+  footer{margin-top:26px;text-align:center;color:var(--ink-soft);font-size:12.5px;}
+
+  @media (max-width:480px){
+    h1{font-size:23px;}
+    body{padding:16px 12px 48px;}
+  }
+  @media print{
+    body{background:#fff;padding:0;}
+    .card,header,.journey{break-inside:avoid;}
+    .journey{background:#fff;color:#000;border:1px solid #999;}
+    .journey h2,.journey p,.step p,.step b{color:#000;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="eyebrow">Project Aura · Phase 0 · Networking</span>
+    <h1>The stuff your degree assumed you already knew</h1>
+    <p>One page. The networking words you recognise but couldn't explain yet — in plain English, with the picture that makes each one click.</p>
+    <div class="thesis">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="4" cy="11" r="3" fill="#0E7C86"/><circle cx="18" cy="5" r="3" fill="#0E7C86"/><circle cx="18" cy="17" r="3" fill="#0E7C86"/><path d="M6.6 9.6 15.4 6M6.6 12.4 15.4 16" stroke="#0E7C86" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <span>A network is just computers trying to talk to each other. Everything below is a detail of <em>how</em> they pull that off.</span>
+    </div>
+  </header>
+
+  <!-- THE ADDRESS SYSTEM -->
+  <div class="section"><span class="eyebrow">Part 1 · The address system</span><span class="rule"></span></div>
+
+  <div class="card">
+    <div class="term">IP address</div>
+    <p class="plain">A number that says <b>where a device is</b> on the network, so messages know where to go and how to get back.</p>
+    <div class="analogy"><span class="lead">Think of it as</span>A house address. No address, no mail.</div>
+    <figure>
+      <svg viewBox="0 0 600 150" role="img" aria-label="Devices with IP addresses on a local network connected to the internet">
+        <rect x="14" y="14" width="372" height="122" rx="10" fill="#DDEFE7" stroke="#2C8A6C" stroke-width="1.5"/>
+        <text x="26" y="34" font-family="ui-monospace,monospace" font-size="11" fill="#1c5e49" font-weight="700">YOUR LOCAL NETWORK</text>
+        <g font-family="ui-monospace,monospace" font-size="11" fill="#17283D">
+          <rect x="34" y="52" width="92" height="58" rx="8" fill="#fff" stroke="#2C8A6C"/><text x="80" y="78" text-anchor="middle">Laptop</text><text x="80" y="96" text-anchor="middle" fill="#0E7C86">192.168.1.10</text>
+          <rect x="154" y="52" width="92" height="58" rx="8" fill="#fff" stroke="#2C8A6C"/><text x="200" y="78" text-anchor="middle">Phone</text><text x="200" y="96" text-anchor="middle" fill="#0E7C86">192.168.1.11</text>
+          <rect x="274" y="52" width="92" height="58" rx="8" fill="#fff" stroke="#2C8A6C"/><text x="320" y="78" text-anchor="middle">Printer</text><text x="320" y="96" text-anchor="middle" fill="#0E7C86">192.168.1.12</text>
+        </g>
+        <line x1="386" y1="75" x2="452" y2="75" stroke="#4C5C70" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <circle cx="510" cy="75" r="42" fill="#D6ECEE" stroke="#0E7C86" stroke-width="1.5"/>
+        <text x="510" y="71" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#0a5258" font-weight="700">THE</text>
+        <text x="510" y="87" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#0a5258" font-weight="700">INTERNET</text>
+      </svg>
+      <div class="cap">Each device gets its own address inside the local network.</div>
+    </figure>
+  </div>
+
+  <div class="card">
+    <div class="term">Private vs public IP</div>
+    <p class="plain"><b>Private</b> = your address inside your own network (everyone's network reuses the same ranges, like <code>192.168.x.x</code>). <b>Public</b> = the single address the outside world sees for your whole network.</p>
+    <div class="analogy"><span class="lead">Think of it as</span>Private = your room number inside a hotel. Public = the hotel's street address that couriers actually deliver to.</div>
+  </div>
+
+  <div class="card">
+    <div class="term">Subnet mask</div>
+    <p class="plain">It draws the line in an IP address between <b>"which part is the neighbourhood"</b> and "which part is the specific house." That's how a device instantly knows if another device is <b>local</b> (talk directly) or <b>far away</b> (send it via the gateway).</p>
+    <div class="analogy"><span class="lead">Think of it as</span>The line that splits a postal code from the house number. It decides who counts as your neighbour.</div>
+  </div>
+
+  <div class="card">
+    <div class="term">Default gateway</div>
+    <p class="plain">The one address a device sends traffic to when the destination is <b>not</b> on the local network. Usually your router.</p>
+    <div class="analogy"><span class="lead">Think of it as</span>The exit door out of your neighbourhood. Anything not local goes through that door to reach the wider world.</div>
+  </div>
+
+  <div class="card">
+    <div class="term">MAC address</div>
+    <p class="plain">A <b>permanent</b> hardware ID burned into each network chip. An IP can change depending on the network you join; the MAC stays the same.</p>
+    <div class="analogy"><span class="lead">Think of it as</span>Your passport number (never changes) vs your current home address, the IP (changes when you move).</div>
+  </div>
+
+  <!-- FINDING THINGS -->
+  <div class="section"><span class="eyebrow">Part 2 · Finding things</span><span class="rule"></span></div>
+
+  <div class="card">
+    <div class="term">DNS</div>
+    <p class="plain">The system that turns a <b>name</b> humans remember (<code>google.com</code>) into the <b>number</b> machines need (the IP). You type a name; DNS hands back the address.</p>
+    <div class="analogy"><span class="lead">Think of it as</span>The contacts app on your phone. You tap "Mum," it dials the actual number. You don't memorise the digits.</div>
+    <figure>
+      <svg viewBox="0 0 600 120" role="img" aria-label="DNS turns a website name into an IP address">
+        <g font-family="system-ui,sans-serif" font-size="12.5">
+          <rect x="14" y="38" width="120" height="44" rx="9" fill="#fff" stroke="#4C5C70"/><text x="74" y="65" text-anchor="middle" fill="#17283D">You: "lcs.qld.edu.au"</text>
+          <rect x="232" y="32" width="136" height="56" rx="9" fill="#D6ECEE" stroke="#0E7C86"/><text x="300" y="56" text-anchor="middle" fill="#0a5258" font-weight="700">DNS</text><text x="300" y="74" text-anchor="middle" fill="#0a5258" font-size="11">the "contacts app"</text>
+          <rect x="466" y="38" width="120" height="44" rx="9" fill="#fff" stroke="#4C5C70"/><text x="526" y="60" text-anchor="middle" fill="#17283D">104.21.8.5</text><text x="526" y="76" text-anchor="middle" fill="#0E7C86" font-size="10">the real address</text>
+        </g>
+        <line x1="134" y1="60" x2="226" y2="60" stroke="#4C5C70" stroke-width="1.5" marker-end="url(#a)"/>
+        <line x1="368" y1="60" x2="460" y2="60" stroke="#0E7C86" stroke-width="1.5" marker-end="url(#b)"/>
+        <defs>
+          <marker id="a" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 z" fill="#4C5C70"/></marker>
+          <marker id="b" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 z" fill="#0E7C86"/></marker>
+        </defs>
+      </svg>
+      <div class="cap">Name in → address out. That's the whole job of DNS.</div>
+    </figure>
+  </div>
+
+  <div class="card">
+    <div class="term">Ports</div>
+    <p class="plain">One device runs many services at once, so each gets a numbered <b>door</b>. Web traffic uses <code>443</code> (secure) and <code>80</code>; email, file shares, etc. each have their own.</p>
+    <div class="analogy"><span class="lead">Think of it as</span>An apartment block at one street address — the port number is the apartment you're actually visiting.</div>
+  </div>
+
+  <!-- THE HARDWARE -->
+  <div class="section"><span class="eyebrow">Part 3 · The boxes that move traffic</span><span class="rule"></span></div>
+
+  <div class="card">
+    <div class="term">Switch vs router</div>
+    <p class="plain">A <b>switch</b> connects devices <b>within one</b> network and passes traffic between them. A <b>router</b> connects <b>different networks</b> together — most importantly, yours to the internet.</p>
+    <div class="analogy"><span class="lead">Think of it as</span>The switch is the hallway connecting rooms in one building. The router is the front gate connecting your building to the whole city.</div>
+  </div>
+
+  <!-- KEEPING IT SAFE -->
+  <div class="section"><span class="eyebrow">Part 4 · Keeping it safe</span><span class="rule"></span></div>
+
+  <div class="card">
+    <div class="term">VLAN</div>
+    <p class="plain">A way to split <b>one physical network into several separate logical ones</b>, so groups can't see each other even though they share the same switches and cables.</p>
+    <div class="analogy"><span class="lead">Think of it as</span>Invisible internal walls. Same building, but the student wing can't wander into the staff offices.</div>
+    <div class="lcs"><span class="tag">LCS</span><span>This is exactly Chris's <b>relief-teacher / student-vs-staff access</b> problem. "Student Wi-Fi shouldn't see the staff admin servers" = put them on different VLANs.</span></div>
+    <figure>
+      <svg viewBox="0 0 600 158" role="img" aria-label="One switch split into two VLANs that cannot see each other">
+        <rect x="234" y="66" width="132" height="30" rx="6" fill="#17283D"/><text x="300" y="86" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#fff">ONE SWITCH</text>
+        <g font-family="system-ui,sans-serif" font-size="11.5">
+          <rect x="20" y="16" width="150" height="40" rx="8" fill="#DDEFE7" stroke="#2C8A6C" stroke-width="1.5"/><text x="95" y="34" text-anchor="middle" fill="#1c5e49" font-weight="700">VLAN 10 · Staff</text><text x="95" y="49" text-anchor="middle" fill="#1c5e49">admin · servers</text>
+          <rect x="20" y="104" width="150" height="40" rx="8" fill="#F8E7CF" stroke="#D9801F" stroke-width="1.5"/><text x="95" y="122" text-anchor="middle" fill="#8a4d12" font-weight="700">VLAN 20 · Students</text><text x="95" y="137" text-anchor="middle" fill="#8a4d12">student Wi-Fi</text>
+        </g>
+        <line x1="170" y1="36" x2="244" y2="74" stroke="#2C8A6C" stroke-width="1.6"/>
+        <line x1="170" y1="124" x2="244" y2="88" stroke="#D9801F" stroke-width="1.6"/>
+        <g><line x1="430" y1="40" x2="500" y2="120" stroke="#c0392b" stroke-width="2"/><line x1="500" y1="40" x2="430" y2="120" stroke="#c0392b" stroke-width="2"/></g>
+        <text x="465" y="148" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#c0392b" font-weight="700">can't see each other</text>
+        <line x1="366" y1="81" x2="420" y2="81" stroke="#4C5C70" stroke-width="1.4" stroke-dasharray="3 3"/>
+      </svg>
+      <div class="cap">Same hardware, walled into separate networks.</div>
+    </figure>
+  </div>
+
+  <div class="card">
+    <div class="term">Firewall</div>
+    <p class="plain">A checkpoint that decides which traffic is <b>allowed in or out</b> based on rules. Blocks the unwanted, lets the approved through.</p>
+    <div class="analogy"><span class="lead">Think of it as</span>The bouncer at the door checking everyone against the list before they get in.</div>
+    <div class="lcs"><span class="tag">LCS</span><span>The school's <b>content filtering</b> — stopping students reaching inappropriate sites — lives at this layer. Same idea: rules deciding what traffic is allowed.</span></div>
+  </div>
+
+  <!-- WORKED EXAMPLE -->
+  <div class="journey">
+    <span class="eyebrow">Put it together</span>
+    <h2>What actually happens when you open a website</h2>
+    <p>Every term above, in the order it fires. Read this once and the whole map locks in.</p>
+    <div class="step"><div class="num">1</div><p>You type <b>lcs.qld.edu.au</b>. Your device asks <b>DNS</b> "what's the address?" and gets back an IP.</p></div>
+    <div class="step"><div class="num">2</div><p>Your device checks its <b>subnet mask</b>: is that IP local or far away? It's far away.</p></div>
+    <div class="step"><div class="num">3</div><p>So it hands the request to the <b>default gateway</b> (your router) — the exit door.</p></div>
+    <div class="step"><div class="num">4</div><p>The <b>router</b> sends it out across the internet, hopping between networks until it reaches the right server.</p></div>
+    <div class="step"><div class="num">5</div><p>A <b>firewall</b> along the way checks the traffic is allowed. It knocks on the right <b>port</b> (443 for a secure site).</p></div>
+    <div class="step"><div class="num">6</div><p>The server answers, the page travels all the way back to <b>your IP address</b> — and loads. All of that in under a second.</p></div>
+  </div>
+
+  <footer>Glance at this whenever a term slips. The real learning comes from using them — this is just the safety net. · PROJECT AURA</footer>
+
+</div>
+</body>
+</html>
